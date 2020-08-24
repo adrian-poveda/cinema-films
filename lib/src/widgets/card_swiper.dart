@@ -1,10 +1,11 @@
+import 'package:cinema_films/src/models/film.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
 class CardSwiper extends StatelessWidget {
   //Necesito recibir la lista de películas
 
-  final List<dynamic> films;
+  final List<Film> films;
 
   //Para que sea obligatorio el parámetro.
   CardSwiper({ @required this.films});
@@ -26,9 +27,11 @@ class CardSwiper extends StatelessWidget {
           //return Image.network('https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg', fit: BoxFit.fill,);
           return ClipRRect(
             borderRadius: BorderRadius.circular(17),
-            child:
-                Image.network('https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg', 
-                                fit: BoxFit.cover,),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/img/loading.gif'),
+              fit: BoxFit.cover,
+              image: NetworkImage(films[index].getPosterURL()),
+            )
           );
         },
         itemCount: films.length,
