@@ -12,7 +12,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Most recient films'),
+        centerTitle: false,
+        title: Text('Movies playing now'),
         backgroundColor: Colors.indigo,
         actions: [
           IconButton(
@@ -24,8 +25,10 @@ class HomePage extends StatelessWidget {
       body: SafeArea( // Sirve para colocar las cosas fuera del notch que la mayoría de móviles tienen ahora
         child: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _filmSwiper()
+              _filmSwiper(),
+              _footer(context)
             ],
           ),
         )
@@ -55,6 +58,37 @@ class HomePage extends StatelessWidget {
         }
         
       },
+    );
+  }
+
+  Widget _footer(BuildContext context) {
+
+    return Container(
+      width: double.infinity,
+      child: Column(
+        children: [
+          Text('Popular films', style: Theme.of(context).textTheme.subhead),
+          FutureBuilder(
+            future: filmsProvider.getPopularFilms(),
+            builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
+
+            if (snapshot.hasData){
+              snapshot.data?.forEach( (film) => print (film.title));
+              return Container();
+              
+        }else{
+          return Container(
+            height: 400,
+            child: Center(
+              child: CircularProgressIndicator()
+              )
+              );
+        }
+        
+      },
+    )
+        ],
+      )
     );
   }
 
