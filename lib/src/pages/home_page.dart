@@ -11,6 +11,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    //Cuando se carga la página llamamos al getPopulares para obtener las peliculas
+    filmsProvider.getPopularFilms();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -67,18 +71,19 @@ class HomePage extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(left:20),
-            child: Text('Popular films', style: Theme.of(context).textTheme.subtitle1)),
+            child: Text('Popular movies', style: Theme.of(context).textTheme.subtitle1)),
           SizedBox(height: 30),
-          FutureBuilder(
-            future: filmsProvider.getPopularFilms(),
+          StreamBuilder(
+            stream: filmsProvider.popularsStream,
             builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
 
             if (snapshot.hasData){
-              return PopularFilm(films: snapshot.data);
+              return PopularFilm(films: snapshot.data,
+                                  nextPage: filmsProvider.getPopularFilms);
               
         }else{
           return Container(
-            height: 400,
+            height: 200,
             child: Center(
               child: CircularProgressIndicator()
               )

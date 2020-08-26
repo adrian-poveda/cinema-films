@@ -13,6 +13,8 @@ class FilmsProvider {
 
   int _popularesPage  = 0;
 
+  bool _loading = false;
+
   List<Film> _populars  = new List();
 
   //Stream de datos //Broadcast para que se pueda escuchar en muchos lugares esos streams
@@ -55,8 +57,11 @@ class FilmsProvider {
 
   Future<List<Film>> getPopularFilms() async {
 
+    if ( _loading ) return [];
+
+    _loading = true;
     _popularesPage++;
-    
+
     final url = Uri.https(_url, '3/movie/popular', {
       'api_key' : _apiKey,
       'language': _language,
@@ -68,6 +73,7 @@ class FilmsProvider {
     _populars.addAll(resp);
     //Añadiendo información al stream mediante el Sink
     popularsSink( _populars );
+    _loading = false;
 
     return resp;
 
