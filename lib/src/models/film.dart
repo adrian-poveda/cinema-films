@@ -90,5 +90,14 @@ class Film {
     
   }
 
+    getBackgroundPosterURL(){
+    if(backdropPath == null ){
+      return 'https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg';
+    }else{
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
+    }
+    
+  }
+
 }
 

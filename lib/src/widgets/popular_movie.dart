@@ -29,21 +29,20 @@ class PopularFilm extends StatelessWidget {
 
     return Container(
       height: _screenSize.height * 0.2,
-      child: PageView.builder(//Renderiza los elementos de forma simulatánea // Builder = solo cuando sean necesarios
+      child: PageView.builder(
         itemCount: films.length,
         pageSnapping: false,
         controller: _pageController,
         itemBuilder: ( context, i) {
           return _createCard(context, films[i]);
         },
-        //children: _cards(context),
       ), 
     );
   }
 
 Widget _createCard(BuildContext context, Film film){
 
-  return Container(
+  final cardFilm = Container(
         margin: EdgeInsets.only(right: 15),
         child: Column(
           children: [
@@ -61,6 +60,15 @@ Widget _createCard(BuildContext context, Film film){
           ],
         ),
       );
+
+    return GestureDetector(
+      child: cardFilm,
+      onTap: () {
+        Film selectedFilm = film;
+        Navigator.pushNamed(context, 'detail', arguments: film);
+
+      },
+    );
 }
 
   List<Widget> _cards(BuildContext context) {
