@@ -1,16 +1,9 @@
-# cinema_films
+# Cinema films APP
 
-A new Flutter project.
+App to show movies that are playing now on cinemas, popolar movies, and all it`s information thanks to TheMovieDB API.
 
-## Getting Started
+## Project functions
 
-This project is a starting point for a Flutter application.
+For now, it only takes movies poster and title and list them on a custom swiper.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The popular movies are listed at bottom and they are almost infinite, because when you get to last popular film of first page,make another API call and return second page of movies.
