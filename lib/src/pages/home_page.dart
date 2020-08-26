@@ -1,6 +1,7 @@
 import 'package:cinema_films/src/models/film.dart';
 import 'package:cinema_films/src/providers/films_provider.dart';
 import 'package:cinema_films/src/widgets/card_swiper.dart';
+import 'package:cinema_films/src/widgets/popular_movie.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,19 +23,15 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      body: SafeArea( // Sirve para colocar las cosas fuera del notch que la mayoría de móviles tienen ahora
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              _filmSwiper(),
-              _footer(context)
-            ],
-          ),
-        )
-      ) 
-      
-      
+      body:Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                _filmSwiper(),
+                _footer(context)
+              ],
+            ),
+          ) 
     );
   }
 
@@ -50,7 +47,7 @@ class HomePage extends StatelessWidget {
                 );
         }else{
           return Container(
-            height: 400,
+            height: 300,
             child: Center(
               child: CircularProgressIndicator()
               )
@@ -66,15 +63,18 @@ class HomePage extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Popular films', style: Theme.of(context).textTheme.subhead),
+          Container(
+            padding: EdgeInsets.only(left:20),
+            child: Text('Popular films', style: Theme.of(context).textTheme.subtitle1)),
+          SizedBox(height: 30),
           FutureBuilder(
             future: filmsProvider.getPopularFilms(),
             builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
 
             if (snapshot.hasData){
-              snapshot.data?.forEach( (film) => print (film.title));
-              return Container();
+              return PopularFilm(films: snapshot.data);
               
         }else{
           return Container(
