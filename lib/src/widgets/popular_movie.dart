@@ -42,17 +42,22 @@ class PopularFilm extends StatelessWidget {
 
 Widget _createCard(BuildContext context, Film film){
 
+  film.uniqueId = '${ film.id }-popular';
+
   final cardFilm = Container(
         margin: EdgeInsets.only(right: 15),
         child: Column(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: FadeInImage(
-                image: NetworkImage( film.getPosterURL() ),
-                placeholder: AssetImage('assets/img/loading.gif'),
-                fit: BoxFit.cover,
-                height: 160,
+            Hero(
+              tag: film.uniqueId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: FadeInImage(
+                  image: NetworkImage( film.getPosterURL() ),
+                  placeholder: AssetImage('assets/img/loading.gif'),
+                  fit: BoxFit.cover,
+                  height: 160,
+                ),
               ),
             ),
             SizedBox(height: 5),
@@ -64,7 +69,6 @@ Widget _createCard(BuildContext context, Film film){
     return GestureDetector(
       child: cardFilm,
       onTap: () {
-        Film selectedFilm = film;
         Navigator.pushNamed(context, 'detail', arguments: film);
 
       },

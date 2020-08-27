@@ -24,18 +24,22 @@ class CardSwiper extends StatelessWidget {
         itemWidth: _screenSize.width * 0.7, //Para tener el 70% del ancho del móvil
         itemHeight: _screenSize.height * 0.5,
         itemBuilder: (BuildContext context, int index){
-          //return Image.network('https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg', fit: BoxFit.fill,);
+
+          films[index].uniqueId = '${ films[index].id }-principal';
           return GestureDetector(
             onTap: (){
               Navigator.pushNamed(context, 'detail', arguments: films[index]);
             },
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(17),
-              child: FadeInImage(
-                placeholder: AssetImage('assets/img/loading.gif'),
-                fit: BoxFit.cover,
-                image: NetworkImage(films[index].getPosterURL()),
-              )
+            child: Hero(
+              tag: films[index].uniqueId,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(17),
+                child: FadeInImage(
+                  placeholder: AssetImage('assets/img/loading.gif'),
+                  fit: BoxFit.cover,
+                  image: NetworkImage(films[index].getPosterURL()),
+                )
+              ),
             ),
           );
         },

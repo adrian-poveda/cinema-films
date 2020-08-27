@@ -26,10 +26,12 @@ class Films {
     }
   }
 
-
 }
 
 class Film {
+  
+  String uniqueId;
+
   double popularity;
   int voteCount;
   bool video;
@@ -83,7 +85,7 @@ class Film {
 
   getPosterURL(){
     if(posterPath == null ){
-      return 'https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg';
+      return 'https://tutaki.org.nz/wp-content/uploads/2019/04/no-image-1.png';
     }else{
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
@@ -92,7 +94,7 @@ class Film {
 
     getBackgroundPosterURL(){
     if(backdropPath == null ){
-      return 'https://images-na.ssl-images-amazon.com/images/I/71+PKDjuooL.jpg';
+      return 'https://lh3.googleusercontent.com/proxy/WpQKbl7LPmTxkShI_oFonfk--gJk9XhK0TQJ7dlbuTzZtY-phNQdF0Z_SsXZIzhe6iQC-sVG_1PH0t2auYUlxZiyDYEjVQ8ZKiHCROW3uexXRvuxKv_i53WpttKzGa-s7Hk';
     }else{
       return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }
