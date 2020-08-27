@@ -15,26 +15,31 @@ class DetailFilm extends StatelessWidget {
     final Film film = ModalRoute.of(context).settings.arguments;
 
     return Scaffold(
-      body: CustomScrollView(//Como si fuera un list view
-      slivers: [
-        _createAppBar( film ),
-        SliverList(
-          delegate: SliverChildListDelegate(
-            [
-              SizedBox(height: 10),
-              _titlePoster( film, context ),
-              _description( film, context ),
-              SizedBox(height: 30),
-              Container( 
-                width: double.infinity,               
+      body: Container(
+        decoration: BoxDecoration(
+          color: Color.fromRGBO(21, 32, 44, 1),
+        ),
+        child: CustomScrollView(//Como si fuera un list view
+        slivers: [
+          _createAppBar( film ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                SizedBox(height: 10),
+                _titlePoster( film, context ),
+                _description( film, context ),
+                SizedBox(height: 30),
+                Container( 
+                  width: double.infinity,               
 
-                child: _movieCast( film.id, context ),
-              )
-              
-            ]
-          ),
-        )
-      ],
+                  child: _movieCast( film.id, context ),
+                )
+                
+              ]
+            ),
+          )
+        ],
+        ),
       )
     );
   }
@@ -43,12 +48,21 @@ class DetailFilm extends StatelessWidget {
 
     return SliverAppBar(
       elevation: 2,
-      backgroundColor: Colors.indigo,
+      backgroundColor: Color.fromRGBO(21, 32, 44, 1),
       floating: false,
       expandedHeight: 200,
       pinned: true,
       flexibleSpace: FlexibleSpaceBar(
         title: Text(film.title),
+        // title: DecoratedBox(
+
+        //         decoration: BoxDecoration(color: Color.fromRGBO(43, 43, 43, 0.8), borderRadius: BorderRadius.circular(10)),
+        //         child: Container(
+        //           padding: EdgeInsets.all(5),
+        //           child: Text(film.title),
+                  
+        //           ),
+        //         ),
         centerTitle: true,
         titlePadding: EdgeInsets.all(10),
         background: FadeInImage(
@@ -83,15 +97,22 @@ class DetailFilm extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text( film. title, style: Theme.of(context).textTheme.headline6, overflow: TextOverflow.ellipsis),
-                Text( film.originalTitle, style: Theme.of(context).textTheme.subtitle1, overflow: TextOverflow.ellipsis),
+                Text( film. title, style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 20), 
+                overflow: TextOverflow.ellipsis),
+                Text( film.originalTitle, style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 15),  overflow: TextOverflow.ellipsis),
                 SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(children: [
-                      Icon(Icons.star_border),
-                      Text(film.voteAverage.toString() + '/10', style: Theme.of(context).textTheme.subtitle1),
+                      Icon(Icons.star_border, color: Colors.white,),
+                      Text(film.voteAverage.toString() + '/10', style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 20), ),
                     ],),
                     _isForAdutl(film)     
                 ],)
@@ -111,11 +132,15 @@ class DetailFilm extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(top: 20, left: 20),
               width: double.infinity,
-              child: Text('Summary', textAlign: TextAlign.start, style: Theme.of(context).textTheme.headline5),
+              child: Text('Summary', textAlign: TextAlign.start, style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 25), ),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12, vertical: 20),
-              child:Text(film.overview, textAlign: TextAlign.justify)
+              child:Text(film.overview, textAlign: TextAlign.justify, style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 16), )
             )
           ],
         ),
@@ -194,7 +219,9 @@ class DetailFilm extends StatelessWidget {
               ),
             ),
             SizedBox(height: 5),
-            Text(actor.name, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.caption)
+            Text(actor.name, overflow: TextOverflow.ellipsis, style:  TextStyle(
+                  color: Colors.white,
+                  fontSize: 12), )
           ],
         ),
       );

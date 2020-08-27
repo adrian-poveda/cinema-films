@@ -94,7 +94,7 @@ class Film {
 
     getBackgroundPosterURL(){
     if(backdropPath == null ){
-      return 'https://lh3.googleusercontent.com/proxy/WpQKbl7LPmTxkShI_oFonfk--gJk9XhK0TQJ7dlbuTzZtY-phNQdF0Z_SsXZIzhe6iQC-sVG_1PH0t2auYUlxZiyDYEjVQ8ZKiHCROW3uexXRvuxKv_i53WpttKzGa-s7Hk';
+      return 'https://i.pinimg.com/originals/ad/47/af/ad47af29ad50df1477b9413f9d521db0.jpg';
     }else{
       return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }

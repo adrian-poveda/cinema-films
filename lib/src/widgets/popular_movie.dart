@@ -61,7 +61,10 @@ Widget _createCard(BuildContext context, Film film){
               ),
             ),
             SizedBox(height: 5),
-            Text(film.title, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.caption)
+            Text(film.title, overflow: TextOverflow.ellipsis, style:  TextStyle(
+              color: Colors.white,
+              fontSize: 12
+            ))
           ],
         ),
       );

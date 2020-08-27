@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:cinema_films/src/models/film.dart';
 import 'package:cinema_films/src/providers/films_provider.dart';
+import 'package:cinema_films/src/search/search_delegate.dart';
 import 'package:cinema_films/src/widgets/card_swiper.dart';
 import 'package:cinema_films/src/widgets/popular_movie.dart';
 import 'package:flutter/material.dart';
@@ -17,26 +20,74 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         centerTitle: false,
-        title: Text('Movies playing now'),
-        backgroundColor: Colors.indigo,
+        title:Text('Movies playing now'),
+        backgroundColor: Color.fromRGBO(21, 32, 44, 1),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: DataSearch(),
+                //query: 'Texto precargado'
+              );
+            },
           )
         ],
       ),
-      body:Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _filmSwiper(),
-                _footer(context)
-              ],
+      body:         
+          Container(
+          decoration: BoxDecoration(
+              color: Color.fromRGBO(21, 32, 44, 1),
             ),
-          ) 
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _filmSwiper(),
+                  _footer(context)
+                ],
+              ),
+            ),
+          
+      
     );
+
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     centerTitle: false,
+    //     title: Text('Movies playing now'),
+    //     backgroundColor: Colors.indigo,
+    //     actions: [
+    //       IconButton(
+    //         icon: Icon(Icons.search),
+    //         onPressed: () {
+    //           showSearch(
+    //             context: context,
+    //             delegate: DataSearch(),
+    //             //query: 'Texto precargado'
+    //           );
+    //         },
+    //       )
+    //     ],
+    //   ),
+    //   body: Stack(
+    //     children: [
+    //       _appBackground(),
+    //       Container(
+    //         child: Column(
+    //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //           children: [
+    //             _filmSwiper(),
+    //             _footer(context)
+    //           ],
+    //         ),
+    //       ) 
+
+    //     ],
+    //   )
+    // );
   }
 
   _filmSwiper() {
@@ -56,8 +107,7 @@ class HomePage extends StatelessWidget {
               child: CircularProgressIndicator()
               )
               );
-        }
-        
+        }   
       },
     );
   }
@@ -71,7 +121,10 @@ class HomePage extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.only(left:20),
-            child: Text('Popular movies', style: Theme.of(context).textTheme.subtitle1)),
+            child: Text('Popular movies', style: TextStyle(
+              color: Colors.white,
+              fontSize: 17
+            ))),
           SizedBox(height: 30),
           StreamBuilder(
             stream: filmsProvider.popularsStream,
@@ -89,12 +142,59 @@ class HomePage extends StatelessWidget {
               )
               );
         }
-        
       },
     )
         ],
       )
     );
+  }
+
+  Widget _appBackground(){
+
+    final gradientBackground = Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: FractionalOffset(0.0,0.6),
+          end: FractionalOffset(0.0, 1.0),
+          colors: [
+            Color.fromRGBO(43, 43, 43, 1),
+            Color.fromRGBO(43, 43, 43, 1),
+            
+          ]
+        )
+      ),
+    );
+
+    return Stack(
+      children: [    
+        //gradientBackground
+        Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(50, 55, 57, 1),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _circularBackground(){
+
+    final circle = Transform.rotate(
+      angle: -pi / 5.0,
+      child: Container(
+      height: 2000,
+      width: 4000,
+      decoration: BoxDecoration(
+        color:Colors.pink
+      ),
+    )
+    );
+    
+    
+
+    return circle;
   }
 
 
