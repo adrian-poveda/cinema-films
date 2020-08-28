@@ -15,21 +15,19 @@ class Films {
 
   Films();
 
-  Films.fromJsonList( List<dynamic> jsonList ){
-    if( jsonList == null ){
+  Films.fromJsonList(List<dynamic> jsonList) {
+    if (jsonList == null) {
       return;
-    }else{
-      for ( var item in jsonList ){
+    } else {
+      for (var item in jsonList) {
         final film = new Film.fromJsonMap(item);
         items.add(film);
       }
     }
   }
-
 }
 
 class Film {
-  
   String uniqueId;
 
   double popularity;
@@ -64,42 +62,36 @@ class Film {
     this.releaseDate,
   });
 
-  Film.fromJsonMap( Map<String, dynamic> json ){
-
-    popularity        = json['popularity'] / 1;
-    voteCount         = json['vote_count'];
-    video             = json['video'];
-    posterPath        = json['poster_path'];
-    id                = json['id'];
-    adult             = json['adult'];
-    backdropPath      = json['backdrop_path'];
-    originalLanguage  = json['original_language'];
-    originalTitle     = json['original_title'];
-    genreIds          = json['genre_ids'].cast<int>();
-    title             = json['title'];
-    voteAverage       = json['vote_average'] / 1;
-    overview          = json['overview'];
-    releaseDate       = json['release_date'];
+  Film.fromJsonMap(Map<String, dynamic> json) {
+    popularity = json['popularity'] / 1;
+    voteCount = json['vote_count'];
+    video = json['video'];
+    posterPath = json['poster_path'];
+    id = json['id'];
+    adult = json['adult'];
+    backdropPath = json['backdrop_path'];
+    originalLanguage = json['original_language'];
+    originalTitle = json['original_title'];
+    genreIds = json['genre_ids'].cast<int>();
+    title = json['title'];
+    voteAverage = json['vote_average'] / 1;
+    overview = json['overview'];
+    releaseDate = json['release_date'];
   }
 
-
-  getPosterURL(){
-    if(posterPath == null ){
+  getPosterURL() {
+    if (posterPath == null) {
       return 'https://tutaki.org.nz/wp-content/uploads/2019/04/no-image-1.png';
-    }else{
+    } else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
     }
-    
   }
 
-    getBackgroundPosterURL(){
-    if(backdropPath == null ){
+  getBackgroundPosterURL() {
+    if (backdropPath == null) {
       return 'https://i.pinimg.com/originals/ad/47/af/ad47af29ad50df1477b9413f9d521db0.jpg';
-    }else{
+    } else {
       return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }
-    
   }
-
 }
-

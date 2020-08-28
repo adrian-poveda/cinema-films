@@ -3,17 +3,16 @@ class Cast {
 
   Cast();
 
-  Cast.fromJsonList( List<dynamic> jsonList ){
-    if( jsonList == null ){
+  Cast.fromJsonList(List<dynamic> jsonList) {
+    if (jsonList == null) {
       return;
-    }else{
-      for ( var item in jsonList ){
+    } else {
+      for (var item in jsonList) {
         final actor = new Actor.fromJsonMap(item);
         items.add(actor);
       }
     }
   }
-
 }
 
 class Actor {
@@ -37,25 +36,23 @@ class Actor {
     this.profilePath,
   });
 
-  Actor.fromJsonMap(Map<String, dynamic> json){
-
-    castId        = json['cast_id'];
-    character     = json['character'];
-    creditId      = json['credit_id'];
-    gender        = json['gender'];
-    id            = json['id'];
-    name          = json['name'];
-    order         = json['order'];
-    profilePath   = json['profile_path'];
+  Actor.fromJsonMap(Map<String, dynamic> json) {
+    castId = json['cast_id'];
+    character = json['character'];
+    creditId = json['credit_id'];
+    gender = json['gender'];
+    id = json['id'];
+    name = json['name'];
+    order = json['order'];
+    profilePath = json['profile_path'];
   }
 
-   getActorPhotoURL(){
-    if(profilePath == null ){
+  getActorPhotoURL() {
+    if (profilePath == null) {
       return 'https://i.pinimg.com/originals/fc/04/73/fc047347b17f7df7ff288d78c8c281cf.png';
-    }else{
+    } else {
       return 'https://image.tmdb.org/t/p/w500/$profilePath';
     }
-    
   }
 }
 
